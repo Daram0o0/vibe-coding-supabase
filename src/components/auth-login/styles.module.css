@@ -1,0 +1,227 @@
+/* Auth Login Component Styles */
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  background-color: var(--bg-light);
+}
+
+.card {
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 48px 32px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  color: var(--text-secondary);
+}
+
+.title {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-quaternary);
+  line-height: 22.5px;
+  margin-bottom: 6px;
+}
+
+.description {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-placeholder);
+  line-height: 21px;
+  margin-bottom: 28px;
+}
+
+.googleButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--white);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 15px 20px;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.googleButton:hover {
+  background-color: var(--bg-light);
+  border-color: var(--text-quaternary);
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.dividerLine {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-light);
+}
+
+.dividerText {
+  position: relative;
+  display: inline-block;
+  background-color: var(--white);
+  padding: 0 12px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-placeholder);
+}
+
+.freeButton {
+  width: 100%;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 15px 20px;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 12px;
+  background-color: transparent;
+}
+
+.freeButton:hover {
+  background-color: var(--bg-light);
+  border-color: var(--text-quaternary);
+}
+
+.terms {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-placeholder);
+  line-height: 18px;
+  margin-bottom: 24px;
+}
+
+.termsLink {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.termsLink:hover {
+  color: var(--text-dark);
+}
+
+.separator {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-light);
+  margin: 24px 0;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-quaternary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.featureItem:hover {
+  color: var(--text-secondary);
+}
+
+.featureIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--text-quaternary);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .card {
+    padding: 32px 24px;
+    max-width: 100%;
+  }
+
+  .icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  .googleButton,
+  .freeButton {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}

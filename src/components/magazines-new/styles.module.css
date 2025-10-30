@@ -1,0 +1,330 @@
+/* 메인 컨테이너 */
+.container {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 260px;
+  background-color: var(--background);
+  min-height: 100vh;
+}
+
+.content {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+/* 뒤로가기 버튼 */
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 116px;
+  height: 39px;
+  background-color: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 32px;
+  padding: 0 16px;
+}
+
+.backButton:hover {
+  background-color: var(--bg-light);
+}
+
+.backIcon {
+  width: 18px;
+  height: 18px;
+}
+
+/* 헤더 섹션 */
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+/* 폼 */
+.form {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 40px;
+}
+
+/* 필드 그룹 */
+.fieldGroup {
+  margin-bottom: 32px;
+}
+
+.fieldGroup:last-of-type {
+  margin-bottom: 40px;
+}
+
+/* 라벨 */
+.label {
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.required {
+  color: var(--brand-red);
+}
+
+/* 업로드 영역 */
+.uploadArea {
+  position: relative;
+}
+
+.fileInput {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 252.5px;
+  background-color: var(--bg-upload);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.uploadLabel:hover {
+  background-color: var(--bg-light);
+}
+
+.uploadIcon {
+  width: 48px;
+  height: 48px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.uploadText {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.uploadSubtext {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: var(--text-quaternary);
+  margin-bottom: 16px;
+}
+
+.uploadFormat {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 19.5px;
+  color: var(--text-placeholder);
+}
+
+/* 셀렉트 컨테이너 */
+.selectContainer {
+  position: relative;
+}
+
+.select {
+  width: 100%;
+  height: 48.5px;
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 0 16px;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22.5px;
+  color: var(--text-placeholder);
+  appearance: none;
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--brand-blue);
+}
+
+.select option {
+  color: var(--text-secondary);
+}
+
+.selectIcon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--text-placeholder);
+  pointer-events: none;
+}
+
+/* 입력 필드 */
+.input {
+  width: 100%;
+  height: 48.5px;
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 0 16px;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 17px;
+  color: var(--text-secondary);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--brand-blue);
+}
+
+.input::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* 텍스트에어리어 */
+.textarea {
+  width: 100%;
+  height: 266px;
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-secondary);
+  resize: vertical;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--brand-blue);
+}
+
+.textarea::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* 태그 도움말 */
+.tagHelp {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 19.5px;
+  color: var(--text-placeholder);
+  margin: 8px 0 0 0;
+}
+
+/* 제출 버튼 */
+.submitButton {
+  width: 100%;
+  height: 56.5px;
+  background-color: var(--text-secondary);
+  border: 1px solid var(--text-secondary);
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22.5px;
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submitButton:hover {
+  background-color: var(--text-dark);
+}
+
+.submitButton:active {
+  transform: translateY(1px);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 120px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 24px;
+  }
+
+  .form {
+    padding: 24px;
+  }
+
+  .uploadLabel {
+    height: 200px;
+  }
+
+  .uploadIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .uploadText {
+    font-size: 14px;
+  }
+
+  .uploadSubtext {
+    font-size: 12px;
+  }
+
+  .uploadFormat {
+    font-size: 11px;
+  }
+}

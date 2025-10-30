@@ -1,0 +1,202 @@
+/* 메인 컨테이너 */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: var(--background);
+}
+
+/* 뒤로가기 버튼 */
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--text-secondary);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 32px;
+}
+
+.backButton:hover {
+  background-color: var(--bg-light);
+}
+
+.backIcon {
+  width: 18px;
+  height: 18px;
+}
+
+/* 헤더 */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 24px;
+}
+
+.subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  line-height: 24px;
+}
+
+/* 구독 카드 */
+.card {
+  background-color: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 552px;
+  width: 100%;
+}
+
+/* 플랜 헤더 */
+.planHeader {
+  background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--white) 100%);
+  border: 1px solid var(--bg-light);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.planName {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 8px;
+  line-height: 24px;
+}
+
+.planDescription {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-quaternary);
+  text-align: center;
+  line-height: 24px;
+}
+
+/* 가격 섹션 */
+.priceSection {
+  text-align: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--bg-light);
+  margin-bottom: 28px;
+}
+
+.price {
+  font-family: Arial, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 57.6px;
+  letter-spacing: -0.32px;
+}
+
+.currency {
+  font-family: Arial, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.period {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-quaternary);
+  line-height: 27px;
+}
+
+/* 기능 리스트 */
+.featuresList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 24px;
+}
+
+.featureIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--brand-green);
+}
+
+/* 구독 버튼 */
+.subscribeButton {
+  width: 100%;
+  background-color: var(--text-secondary);
+  color: var(--white);
+  border: 1px solid var(--text-secondary);
+  border-radius: 10px;
+  padding: 20px 24px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.subscribeButton:hover {
+  background-color: var(--text-dark);
+  border-color: var(--text-dark);
+  box-shadow: 0 4px 12px rgba(55, 65, 81, 0.3);
+}
+
+.subscribeButton:active {
+  transform: translateY(1px);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  .card {
+    padding: 32px;
+  }
+
+  .price {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .currency {
+    font-size: 40px;
+  }
+}
