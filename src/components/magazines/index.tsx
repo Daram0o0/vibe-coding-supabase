@@ -4,10 +4,11 @@ import { LogIn, Edit3, Bell } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './styles.module.css';
-import { magazineData } from '@/commons/magazineData';
+import { useMagazinesBinding } from './hooks/index.binding.hook';
 
 export default function Magazines() {
   const router = useRouter();
+  const { magazines, isLoading, error } = useMagazinesBinding();
 
   const handleLogin = () => {
     router.push('/auth/login');
@@ -21,8 +22,8 @@ export default function Magazines() {
     router.push('/payments');
   };
 
-  const handleArticleClick = (index: number) => {
-    router.push(`/magazines/${index}`);
+  const handleArticleClick = (id: string) => {
+    router.push(`/magazines/${id}`);
   };
 
   return (
@@ -53,34 +54,51 @@ export default function Magazines() {
 
       {/* 아티클 그리드 */}
       <section className={styles.articlesGrid}>
-        {magazineData.map((article, index) => (
-          <article key={index} className={styles.articleCard} onClick={() => handleArticleClick(index)}>
-            <div className={styles.imageContainer}>
-              <Image
-                src={article.image}
-                alt={article.title}
-                className={styles.articleImage}
-                width={323}
-                height={200}
-                priority={index < 4}
-              />
-              <div className={`${styles.categoryOverlay} ${styles[article.categoryColor]}`}>{article.category}</div>
-            </div>
-
+        {isLoading && (
+          <div className={styles.articleCard}>
             <div className={styles.articleContent}>
-              <h2 className={styles.articleTitle}>{article.title}</h2>
-              <p className={styles.articleDescription}>{article.description}</p>
-
-              <div className={styles.tagsContainer}>
-                {article.tags.map((tag, tagIndex) => (
-                  <span key={tagIndex} className={styles.tag}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              <h2 className={styles.articleTitle}>로딩 중...</h2>
             </div>
-          </article>
-        ))}
+          </div>
+        )}
+        {error && !isLoading && (
+          <div className={styles.articleCard}>
+            <div className={styles.articleContent}>
+              <h2 className={styles.articleTitle}>오류</h2>
+              <p className={styles.articleDescription}>{error}</p>
+            </div>
+          </div>
+        )}
+        {!isLoading &&
+          !error &&
+          magazines.map((article) => (
+            <article key={article.id} className={styles.articleCard} onClick={() => handleArticleClick(article.id)}>
+              <div className={styles.imageContainer}>
+                <Image
+                  src={article.thumbnail_url || '/icons/google.svg'}
+                  alt={article.title}
+                  className={styles.articleImage}
+                  width={323}
+                  height={200}
+                  priority={false}
+                />
+                <div className={styles.categoryOverlay}>{article.category}</div>
+              </div>
+
+              <div className={styles.articleContent}>
+                <h2 className={styles.articleTitle}>{article.title}</h2>
+                <p className={styles.articleDescription}>{article.description}</p>
+
+                <div className={styles.tagsContainer}>
+                  {(article.tags || []).map((tag, tagIndex) => (
+                    <span key={tagIndex} className={styles.tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
       </section>
     </main>
   );

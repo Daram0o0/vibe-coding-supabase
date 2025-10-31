@@ -3,19 +3,44 @@ import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import styles from './styles.module.css';
-import { getMagazineById } from '@/commons/magazineData';
 import { useParams } from 'next/navigation';
+import { useMagazineDetailBinding } from './hooks/index.func.binding';
 
 export default function MagazinesDetail() {
   const params = useParams();
-  const id = parseInt(params.id as string);
-  const magazineData = getMagazineById(id);
+  const id = (params.id as string) || '';
+  const { data: magazineData, isLoading, error } = useMagazineDetailBinding(id);
 
   const handleBackToList = () => {
     window.history.back();
   };
 
-  // 데이터가 없으면 404 처리
+  if (isLoading) {
+    return (
+      <main className={styles.container}>
+        <div className={styles.content}>
+          <h1>불러오는 중...</h1>
+        </div>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className={styles.container}>
+        <div className={styles.content}>
+          <h1>오류가 발생했습니다</h1>
+          <p>{error}</p>
+          <button className={styles.backButton} onClick={handleBackToList}>
+            <ArrowLeft className={styles.backIcon} />
+            목록으로
+          </button>
+        </div>
+      </main>
+    );
+  }
+
+  // 데이터가 없거나 미일치시 404 처리
   if (!magazineData) {
     return (
       <main className={styles.container}>
@@ -49,8 +74,8 @@ export default function MagazinesDetail() {
 
         {/* 본문 영역 */}
         <div className={styles.content}>
-          {/* 날짜 */}
-          <div className={styles.date}>{magazineData.date}</div>
+          {/* 날짜 (DB 미보유) */}
+          {magazineData.date ? <div className={styles.date}>{magazineData.date}</div> : null}
 
           {/* 제목 */}
           <h1 className={styles.title}>{magazineData.title}</h1>
