@@ -7,17 +7,7 @@ interface SubscriptionRequest {
   status: 'Paid' | 'Cancelled';
 }
 
-interface PortOnePaymentResponse {
-  paymentId: string;
-  amount: {
-    total: number;
-  };
-  billingKey?: string;
-  orderName?: string;
-  customer?: {
-    id: string;
-  };
-}
+// PortOne API 응답 구조는 다양할 수 있으므로 any 타입으로 처리
 
 export async function POST(request: NextRequest) {
   try {
@@ -67,7 +57,32 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const paymentData: PortOnePaymentResponse = await paymentResponse.json();
+      const paymentData: unknown = await paymentResponse.json();
+
+      // 응답 데이터 로깅 (디버깅용)
+      console.log('PortOne 결제정보 응답:', JSON.stringify(paymentData, null, 2));
+
+      // paymentId 추출 (다양한 필드명 대응)
+      const paymentDataObj = paymentData as Record<string, unknown>;
+      const transactionKey =
+        (paymentDataObj.paymentId as string) ||
+        (paymentDataObj.id as string) ||
+        (paymentDataObj.payment_id as string) ||
+        body.payment_id;
+
+      // amount 추출 (다양한 구조 대응)
+      const amountObj = paymentDataObj.amount as Record<string, unknown> | number | undefined;
+      const amountValue =
+        (typeof amountObj === 'object' && amountObj && (amountObj.total as number)) ||
+        (typeof amountObj === 'number' ? amountObj : 0) ||
+        0;
+
+      if (!transactionKey) {
+        return NextResponse.json(
+          { success: false, error: '결제정보에서 paymentId를 찾을 수 없습니다.', details: paymentData },
+          { status: 500 },
+        );
+      }
 
       // 4-2) 현재 시각 및 계산된 날짜 생성
       const now = new Date();
@@ -87,8 +102,8 @@ export async function POST(request: NextRequest) {
 
       // 4-3) Supabase의 payment 테이블에 등록
       const { error: insertError } = await supabase.from('payment').insert({
-        transaction_key: paymentData.paymentId,
-        amount: paymentData.amount.total,
+        transaction_key: transactionKey,
+        amount: amountValue,
         status: 'Paid',
         start_at: now.toISOString(),
         end_at: endAt.toISOString(),
@@ -104,7 +119,13 @@ export async function POST(request: NextRequest) {
 
       // 4-4) 다음달 구독예약 시나리오
       // billingKey가 있는 경우에만 예약 가능
-      if (paymentData.billingKey && paymentData.orderName && paymentData.customer?.id) {
+      const customerObj = paymentDataObj.customer as Record<string, unknown> | undefined;
+      const billingKey = (paymentDataObj.billingKey as string) || (paymentDataObj.billing_key as string);
+      const orderName =
+        (paymentDataObj.orderName as string) || (paymentDataObj.order_name as string) || 'IT 매거진 월간 구독';
+      const customerId = (customerObj?.id as string) || (paymentDataObj.customer_id as string);
+
+      if (billingKey && orderName && customerId) {
         const scheduleResponse = await fetch(
           `https://api.portone.io/payments/${encodeURIComponent(nextScheduleId)}/schedule`,
           {
@@ -115,13 +136,13 @@ export async function POST(request: NextRequest) {
             },
             body: JSON.stringify({
               payment: {
-                billingKey: paymentData.billingKey,
-                orderName: paymentData.orderName,
+                billingKey: billingKey,
+                orderName: orderName,
                 customer: {
-                  id: paymentData.customer.id,
+                  id: customerId,
                 },
                 amount: {
-                  total: paymentData.amount.total,
+                  total: amountValue,
                 },
                 currency: 'KRW',
               },
@@ -135,6 +156,12 @@ export async function POST(request: NextRequest) {
           console.error('구독 예약 오류:', errorData);
           // 예약 실패해도 결제는 성공했으므로 경고만 로그로 남기고 계속 진행
         }
+      } else {
+        console.warn('구독 예약을 위한 필수 정보가 없습니다:', {
+          billingKey: !!billingKey,
+          orderName: !!orderName,
+          customerId: !!customerId,
+        });
       }
     }
 
