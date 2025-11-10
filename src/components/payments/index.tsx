@@ -2,6 +2,7 @@
 import React from 'react';
 import { Check, ArrowLeft } from 'lucide-react';
 import styles from './styles.module.css';
+import { usePayment } from './hooks/index.payment.hook';
 
 interface SubscriptionData {
   planName: string;
@@ -22,8 +23,10 @@ const subscriptionData: SubscriptionData = {
 };
 
 export default function Payments() {
-  const handleSubscribe = () => {
-    console.log('구독 결제 시도');
+  const { requestIssueBillingKey } = usePayment();
+
+  const handleSubscribe = async () => {
+    await requestIssueBillingKey();
   };
 
   const handleBackToList = () => {
