@@ -4,21 +4,26 @@ import { ArrowLeft, Check } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { usePaymentCancel } from './hooks/index.payment.cancel.hook';
+import { usePaymentStatus } from './hooks/index.payment.status.hook';
 import styles from './styles.module.css';
 
 export default function MyPage() {
   const router = useRouter();
   const { cancelSubscription } = usePaymentCancel();
+  const { isSubscribed, transactionKey, statusMessage, isLoading } = usePaymentStatus();
 
   const handleBackToList = () => {
     router.push('/magazines');
   };
 
   const handleCancelSubscription = async () => {
-    // TODO: 실제 transactionKey는 Supabase에서 가져와야 함
-    // 임시로 테스트용 transactionKey 사용
-    const transactionKey = 'payment-1762829420909-zfcx00165';
-    await cancelSubscription(transactionKey);
+    if (transactionKey) {
+      await cancelSubscription(transactionKey);
+    }
+  };
+
+  const handleSubscribe = () => {
+    router.push('/payments');
   };
 
   return (
@@ -52,7 +57,7 @@ export default function MyPage() {
         <div className={styles.subscriptionHeader}>
           <h3 className={styles.subscriptionTitle}>구독 플랜</h3>
           <div className={styles.subscriptionBadge}>
-            <span>구독중</span>
+            <span>{isLoading ? '로딩중...' : statusMessage}</span>
           </div>
         </div>
         <div className={styles.subscriptionContent}>
@@ -71,9 +76,15 @@ export default function MyPage() {
               <span>광고 없는 깔끔한 읽기 환경</span>
             </li>
           </ul>
-          <button className={styles.cancelButton} onClick={handleCancelSubscription}>
-            구독 취소
-          </button>
+          {isSubscribed ? (
+            <button className={styles.cancelButton} onClick={handleCancelSubscription}>
+              구독 취소
+            </button>
+          ) : (
+            <button className={styles.cancelButton} onClick={handleSubscribe}>
+              구독하기
+            </button>
+          )}
         </div>
       </div>
     </main>
