@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Upload, ChevronDown } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import styles from './styles.module.css';
 import { useSubmitMagazine } from './hooks/index.submit.hook';
 
@@ -122,10 +123,13 @@ export default function MagazinesNew() {
               >
                 {formData.imagePreview ? (
                   <>
-                    <img
+                    <Image
                       src={formData.imagePreview}
                       alt="미리보기"
+                      width={800}
+                      height={240}
                       style={{ width: '100%', height: 240, objectFit: 'cover' }}
+                      unoptimized
                     />
                     <button
                       type="button"
