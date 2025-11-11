@@ -97,21 +97,12 @@ export async function POST(request: NextRequest) {
       endGraceAt.setDate(endGraceAt.getDate() + 31); // 현재시각 + 31일
 
       // next_schedule_at: end_at + 1일 오전 10시~11시(한국 KST 기준) 사이 임의 시각
+      // KST 10시~11시 = UTC 1시~2시 (KST는 UTC+9)
       const nextScheduleAt = new Date(endAt);
       nextScheduleAt.setDate(nextScheduleAt.getDate() + 1);
-      // 한국 시간대(KST, UTC+9) 기준으로 10시~11시 사이 임의 시각 생성
-      const year = nextScheduleAt.getUTCFullYear();
-      const month = String(nextScheduleAt.getUTCMonth() + 1).padStart(2, '0');
-      const day = String(nextScheduleAt.getUTCDate()).padStart(2, '0');
-      const hour = 10; // KST 10시
-      const minute = Math.floor(Math.random() * 60); // 0~59분
-      const second = Math.floor(Math.random() * 60); // 0~59초
-      // ISO 8601 형식으로 KST 시간대 명시: YYYY-MM-DDTHH:mm:ss+09:00
-      const kstDateString = `${year}-${month}-${day}T${String(hour).padStart(2, '0')}:${String(minute).padStart(
-        2,
-        '0',
-      )}:${String(second).padStart(2, '0')}+09:00`;
-      const nextScheduleAtKST = new Date(kstDateString);
+      // UTC 기준으로 1시~2시 사이 임의 시각 생성 (KST 10시~11시에 해당)
+      nextScheduleAt.setUTCHours(1, Math.floor(Math.random() * 60), Math.floor(Math.random() * 60), 0); // UTC 1시 00분~59분 = KST 10시 00분~59분
+      const nextScheduleAtUTC = nextScheduleAt;
 
       // next_schedule_id: 임의로 생성한 UUID
       const nextScheduleId = randomUUID();
@@ -124,7 +115,7 @@ export async function POST(request: NextRequest) {
         start_at: now.toISOString(),
         end_at: endAt.toISOString(),
         end_grace_at: endGraceAt.toISOString(),
-        next_schedule_at: nextScheduleAtKST.toISOString(),
+        next_schedule_at: nextScheduleAtUTC.toISOString(),
         next_schedule_id: nextScheduleId,
       });
 
@@ -162,7 +153,7 @@ export async function POST(request: NextRequest) {
                 },
                 currency: 'KRW',
               },
-              timeToPay: nextScheduleAtKST.toISOString(),
+              timeToPay: nextScheduleAtUTC.toISOString(),
             }),
           },
         );
