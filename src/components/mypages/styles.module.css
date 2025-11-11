@@ -1,0 +1,230 @@
+/* 메인 컨테이너 */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: var(--background);
+}
+
+/* 목록으로 버튼 */
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 24px;
+}
+
+.backButton:hover {
+  background-color: var(--bg-light);
+}
+
+.backIcon {
+  width: 20px;
+  height: 20px;
+}
+
+/* 헤더 섹션 */
+.headerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.mainTitle {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-quaternary);
+  margin: 0;
+}
+
+/* 프로필 카드 */
+.profileCard {
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.profileImageContainer {
+  margin-bottom: 16px;
+}
+
+.profileImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  border: 1px solid var(--bg-light);
+  object-fit: cover;
+}
+
+.profileName {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.profileDescription {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: var(--text-quaternary);
+  margin: 0 0 16px 0;
+}
+
+.joinDateBadge {
+  padding: 8px 12px;
+  background-color: var(--bg-gradient-start);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--text-quaternary);
+}
+
+/* 구독 플랜 카드 */
+.subscriptionCard {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 1px solid var(--brand-green);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.subscriptionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.subscriptionTitle {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.subscriptionBadge {
+  padding: 6px 12px;
+  background-color: var(--brand-green);
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  color: var(--white);
+}
+
+.subscriptionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.planName {
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #047857;
+  margin: 0;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #065f46;
+}
+
+.checkIcon {
+  width: 16px;
+  height: 16px;
+  color: #065f46;
+  flex-shrink: 0;
+}
+
+.cancelButton {
+  align-self: flex-start;
+  padding: 12px 16px;
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: var(--text-quaternary);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: var(--bg-light);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .profileCard {
+    padding: 24px;
+  }
+
+  .subscriptionCard {
+    padding: 20px;
+  }
+}
+
+
