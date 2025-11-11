@@ -17,7 +17,7 @@ export default function MyPage() {
   const handleCancelSubscription = async () => {
     // TODO: 실제 transactionKey는 Supabase에서 가져와야 함
     // 임시로 테스트용 transactionKey 사용
-    const transactionKey = 'test-transaction-key';
+    const transactionKey = 'payment-1762829420909-zfcx00165';
     await cancelSubscription(transactionKey);
   };
 
