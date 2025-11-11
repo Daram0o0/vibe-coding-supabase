@@ -6,6 +6,7 @@ import MagazinesDetail from "@/components/magazines-detail";
 import MagazinesNew from "@/components/magazines-new";
 import Payments from "@/components/payments";
 import AuthLogin from "@/components/auth-login";
+import MyPage from "@/components/mypages";
 import { 
   BookOpen, 
   CreditCard, 
@@ -13,7 +14,8 @@ import {
   Lock, 
   Library, 
   ArrowRight,
-  ArrowLeft 
+  ArrowLeft,
+  User
 } from "lucide-react";
 
 type ComponentKey = 
@@ -22,7 +24,8 @@ type ComponentKey =
   | "detailMagazine"
   | "magazineNew"
   | "payments"
-  | "authLogin";
+  | "authLogin"
+  | "myPage";
 
 interface ComponentItem {
   key: ComponentKey;
@@ -73,6 +76,14 @@ const components: ComponentItem[] = [
     icon: Lock,
     color: "#10b981",
     component: AuthLogin,
+  },
+  {
+    key: "myPage",
+    title: "마이페이지",
+    description: "구독 정보 및 프로필을 확인하는 페이지",
+    icon: User,
+    color: "#8b5cf6",
+    component: MyPage,
   },
 ];
 
